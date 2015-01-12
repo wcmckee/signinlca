@@ -81,11 +81,15 @@ os.chdir(signpath)
 
 # <codecell>
 
-opday = open(str(returndate()) + '.json', 'a')
+opday = open((firnam + lasnam) + '.json', 'w')
 
 # <codecell>
 
-opday.write(convj)
+opday.write(str(convj))
+
+# <codecell>
+
+convj
 
 # <codecell>
 
