@@ -6,8 +6,28 @@
 # script to signin for volunteers at lca2015
 # 
 # test!
+# 
+# The script asks for input of firstname, lastname, tshirt size, amount of coffee volc and comments. 
+# It creates a python dict with this data along with the current date and hour. 
+# It gets the username of user and saves the data in the users home dir under the folder signinlca. 
+# It saves the data as a json object.
+# Currently saves the file as firstname + lastname. Could this be improved?
+# 
+# 
+# TODO
+# 
+# add option to choose to login or logout. Y/N option for each one. 
+# 
+# add logout script that appends to the login data. saves, time/date/comment. anything else?
+# 
+# Asign to jobs/room?
+# 
+# Graph up total hour worked in day/week
+# 
+# scp/rsync data to server/web page.
+# 
 
-# In[29]:
+# In[71]:
 
 import os
 import time
@@ -15,7 +35,7 @@ import json
 import getpass
 
 
-# In[30]:
+# In[72]:
 
 def returndate():
     return time.strftime(("%d" + "-" + "%b" + "-" + "%Y"))
@@ -23,78 +43,9 @@ def returndate():
 def returntime():
     return time.strftime("%H:%M:%S")
 
-
-# In[31]:
-
-firnam = raw_input('first name: ')
-lasnam = raw_input('last name: ')
-tshir = raw_input('tshirt size: ')
-cofvol = raw_input('coffee volc: ')
-comen = raw_input('comments: ')
-
-
-# In[32]:
-
-betdict = dict()
-
-
-# In[33]:
-
-betdict.update({'first-name' : firnam})
-betdict.update({'last-name' : lasnam})
-betdict.update({'signin-date' : returndate()})
-betdict.update({'signin-hrmin' : returntime()})
-betdict.update({'tshirt-size' : tshir})
-betdict.update({'coffees' : int(cofvol)})
-betdict.update({'comments:' : comen})
-
-
-# In[34]:
-
-betdict
-
-
-# In[35]:
-
-convj = json.dumps(betdict)
-
-
-# In[36]:
-
-convj
-
-
-# In[37]:
-
-puser = getpass.getuser()
-
-
-# Current path is wcmckee@localhost:~/signinlca/18/Jan/2015$
-# This is backwards and should be ~/signinlca/2015/Jan/18.
-# 
-# make path /home/user/signinlca/2015 (year)
-# 
-# make path /home/user/signinlca/Jan (month)
-# 
-# make path /home/user/signinlca/18 (day)
-
-# In[38]:
-
-time.strftime("%Y") #This is the year
-
-time.strftime("%d") #This is the day
-
-time.strftime("%b") #This is the month
-
-
-# In[39]:
-
 yrnum = time.strftime("%Y")
 mnthnum = time.strftime("%b")
 dayzum = time.strftime("%d")
-
-
-# In[40]:
 
 signpath = ('/home/' + puser + '/signinlca')
 yrpath = (signpath + '/' + yrnum)
@@ -102,12 +53,7 @@ mnthpath = (yrpath + '/' + mnthnum)
 dayzpath = (mnthpath + '/' + dayzum)
 
 
-# In[41]:
-
-yrpath
-
-
-# In[42]:
+# In[84]:
 
 if os.path.isdir(signpath) == True:
     print 'Path is there'
@@ -116,7 +62,7 @@ else:
     os.mkdir(signpath)
 
 
-# In[43]:
+# In[85]:
 
 if os.path.isdir(yrpath) == True:
     print 'Year Path is there'
@@ -137,40 +83,70 @@ else:
     os.mkdir(dayzpath)
 
 
-# In[43]:
+# In[73]:
 
-
-
-
-# In[44]:
-
+firnam = raw_input('first name: ')
+lasnam = raw_input('last name: ')
+tshir = raw_input('tshirt size: ')
+cofvol = raw_input('coffee volc: ')
+comen = raw_input('comments: ')
+betdict = dict()
+betdict.update({'first-name' : firnam})
+betdict.update({'last-name' : lasnam})
+betdict.update({'signin-date' : returndate()})
+betdict.update({'signin-hrmin' : returntime()})
+betdict.update({'tshirt-size' : tshir})
+betdict.update({'coffees' : int(cofvol)})
+betdict.update({'comments:' : comen})
+convj = json.dumps(betdict)
+puser = getpass.getuser()
 os.chdir(dayzpath)
-
-
-# In[45]:
-
 opday = open((firnam + lasnam) + '.json', 'w')
-
-
-# In[48]:
-
 opday.write(str(convj))
 opday.close()
 
 
-# In[49]:
+# In[93]:
 
-convj
+signoutz = open((firnam + lasnam) + '.json', 'w')
 
-
-# In[47]:
-
-
-
-
-# In[47]:
+comout = raw_input('out comments: ')
+outdic = dict()
+outdic.update({'signout-date': returndate})
+outdic.update({'signout-time': returntime})
+outdic.update({'signout-comment': comout})
 
 
+# Current path is wcmckee@localhost:~/signinlca/18/Jan/2015$
+# This is backwards and should be ~/signinlca/2015/Jan/18.
+# 
+# make path /home/user/signinlca/2015 (year)
+# 
+# make path /home/user/signinlca/Jan (month)
+# 
+# make path /home/user/signinlca/18 (day)
+
+# In[80]:
+
+time.strftime("%Y") #This is the year
+
+time.strftime("%d") #This is the day
+
+time.strftime("%b") #This is the month
+
+
+# In[92]:
+
+signoutz = open((firnam + lasnam) + '.json', 'w')
+
+comout = raw_input('out comments: ')
+outdic = dict()
+
+
+# In[90]:
+
+outdic.update({'signout-date': returndate})
+outdic.update({'signout-time': returntime})
 
 
 # In[ ]:
