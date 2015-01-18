@@ -27,7 +27,7 @@
 # scp/rsync data to server/web page.
 # 
 
-# In[71]:
+# In[94]:
 
 import os
 import time
@@ -35,13 +35,15 @@ import json
 import getpass
 
 
-# In[72]:
+# In[95]:
 
 def returndate():
     return time.strftime(("%d" + "-" + "%b" + "-" + "%Y"))
 
 def returntime():
     return time.strftime("%H:%M:%S")
+
+puser = getpass.getuser()
 
 yrnum = time.strftime("%Y")
 mnthnum = time.strftime("%b")
@@ -53,7 +55,7 @@ mnthpath = (yrpath + '/' + mnthnum)
 dayzpath = (mnthpath + '/' + dayzum)
 
 
-# In[84]:
+# In[96]:
 
 if os.path.isdir(signpath) == True:
     print 'Path is there'
@@ -62,7 +64,7 @@ else:
     os.mkdir(signpath)
 
 
-# In[85]:
+# In[97]:
 
 if os.path.isdir(yrpath) == True:
     print 'Year Path is there'
@@ -83,7 +85,12 @@ else:
     os.mkdir(dayzpath)
 
 
-# In[73]:
+# In[104]:
+
+os.chdir(dayzpath)
+
+
+# In[98]:
 
 firnam = raw_input('first name: ')
 lasnam = raw_input('last name: ')
@@ -100,61 +107,21 @@ betdict.update({'coffees' : int(cofvol)})
 betdict.update({'comments:' : comen})
 convj = json.dumps(betdict)
 puser = getpass.getuser()
-os.chdir(dayzpath)
 opday = open((firnam + lasnam) + '.json', 'w')
 opday.write(str(convj))
 opday.close()
 
 
-# In[93]:
-
-signoutz = open((firnam + lasnam) + '.json', 'w')
+# In[102]:
 
 comout = raw_input('out comments: ')
 outdic = dict()
-outdic.update({'signout-date': returndate})
-outdic.update({'signout-time': returntime})
+outdic.update({'signout-date': returndate()})
+outdic.update({'signout-time': returntime()})
 outdic.update({'signout-comment': comout})
-
-
-# Current path is wcmckee@localhost:~/signinlca/18/Jan/2015$
-# This is backwards and should be ~/signinlca/2015/Jan/18.
-# 
-# make path /home/user/signinlca/2015 (year)
-# 
-# make path /home/user/signinlca/Jan (month)
-# 
-# make path /home/user/signinlca/18 (day)
-
-# In[80]:
-
-time.strftime("%Y") #This is the year
-
-time.strftime("%d") #This is the day
-
-time.strftime("%b") #This is the month
-
-
-# In[92]:
-
-signoutz = open((firnam + lasnam) + '.json', 'w')
-
-comout = raw_input('out comments: ')
-outdic = dict()
-
-
-# In[90]:
-
-outdic.update({'signout-date': returndate})
-outdic.update({'signout-time': returntime})
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
+conout = json.dumps(outdic)
+signoutz = open((firnam + lasnam) + '.json', 'a')
+signoutz.write(str(conout))
+signoutz.close()
 
 
