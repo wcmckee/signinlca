@@ -27,7 +27,7 @@
 # scp/rsync data to server/web page.
 # 
 
-# In[94]:
+# In[1]:
 
 import os
 import time
@@ -35,7 +35,7 @@ import json
 import getpass
 
 
-# In[95]:
+# In[2]:
 
 def returndate():
     return time.strftime(("%d" + "-" + "%b" + "-" + "%Y"))
@@ -55,7 +55,7 @@ mnthpath = (yrpath + '/' + mnthnum)
 dayzpath = (mnthpath + '/' + dayzum)
 
 
-# In[96]:
+# In[3]:
 
 if os.path.isdir(signpath) == True:
     print 'Path is there'
@@ -64,7 +64,7 @@ else:
     os.mkdir(signpath)
 
 
-# In[97]:
+# In[4]:
 
 if os.path.isdir(yrpath) == True:
     print 'Year Path is there'
@@ -85,43 +85,62 @@ else:
     os.mkdir(dayzpath)
 
 
-# In[104]:
+# In[5]:
 
 os.chdir(dayzpath)
 
 
-# In[98]:
+# In[6]:
 
-firnam = raw_input('first name: ')
-lasnam = raw_input('last name: ')
-tshir = raw_input('tshirt size: ')
-cofvol = raw_input('coffee volc: ')
-comen = raw_input('comments: ')
-betdict = dict()
-betdict.update({'first-name' : firnam})
-betdict.update({'last-name' : lasnam})
-betdict.update({'signin-date' : returndate()})
-betdict.update({'signin-hrmin' : returntime()})
-betdict.update({'tshirt-size' : tshir})
-betdict.update({'coffees' : int(cofvol)})
-betdict.update({'comments:' : comen})
-convj = json.dumps(betdict)
-puser = getpass.getuser()
-opday = open((firnam + lasnam) + '.json', 'w')
-opday.write(str(convj))
-opday.close()
+loginz = raw_input('signin y/n ')
+logoutz = raw_input('signouts y/n ')
 
 
-# In[102]:
+# In[7]:
 
-comout = raw_input('out comments: ')
-outdic = dict()
-outdic.update({'signout-date': returndate()})
-outdic.update({'signout-time': returntime()})
-outdic.update({'signout-comment': comout})
-conout = json.dumps(outdic)
-signoutz = open((firnam + lasnam) + '.json', 'a')
-signoutz.write(str(conout))
-signoutz.close()
+if 'y' in loginz:
+    firnam = raw_input('first name: ')
+    lasnam = raw_input('last name: ')
+    tshir = raw_input('tshirt size: ')
+    cofvol = raw_input('coffee volc: ')
+    comen = raw_input('comments: ')
+    betdict = dict()
+    betdict.update({'first-name' : firnam})
+    betdict.update({'last-name' : lasnam})
+    betdict.update({'signin-date' : returndate()})
+    betdict.update({'signin-hrmin' : returntime()})
+    betdict.update({'tshirt-size' : tshir})
+    betdict.update({'coffees' : int(cofvol)})
+    betdict.update({'comments:' : comen})
+    convj = json.dumps(betdict)
+    puser = getpass.getuser()
+    opday = open((firnam + lasnam) + '.json', 'w')
+    opday.write(str(convj))
+    opday.close()
+else:
+    print ('not signing in')
+
+
+# In[8]:
+
+if 'y' in logoutz:
+    comout = raw_input('out comments: ')
+    outdic = dict()
+    
+    firnaz = raw_input('first name: ')
+    lasnaz = raw_input('last name: ')
+    outdic.update({'signout-date': returndate()})
+    outdic.update({'signout-time': returntime()})
+    outdic.update({'signout-comment': comout})
+    conout = json.dumps(outdic)
+    signoutz = open((firnaz + lasnaz) + '.json', 'a')
+    signoutz.write(str(conout))
+    signoutz.close()
+else:
+    print ('not signing out')
+
+
+# In[ ]:
+
 
 
