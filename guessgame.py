@@ -1,4 +1,5 @@
 import random
+import urwid
 #What numbers do you  want to guess. Guess between 0,10,
 #20,30 30,40 etc
 
@@ -19,7 +20,7 @@ for guesz in range(10):
      #numtak = numchez - 10
      lownumz = (numchez)
 
-     innumz = ('Enter a number between ' + str(farchez) + ' and ' + str(lownumz))  
+     innumz = ('Enter a number between ' + str(farchez) + ' and ' + str(lownumz) + ': ')  
 
 #def GiveNum():
 #     return raw_input(innumz)
@@ -30,6 +31,10 @@ for guesz in range(10):
      print guesintz
      print randnum
      if guesintz == randnum:
+          txt = urwid.Text('You Win!')
+          fill = urwid.Filler(txt, 'top')
+          loop = urwid.MainLoop(fill)
+          loop.run()
           print 'You Win!'
      else:
           print 'You Lose!'
