@@ -5,18 +5,21 @@ import random
 numchez = 0
 
 for guesz in range(10):
-     print (numchez + 10)
-     numchez = numchez + 10
+     #print (numchez + 10)
+     farchez = (numchez)
+     numchez = (numchez + 10)
+
 
      def GetNum():
-          return random.randint(0,9)
+          return random.randint(farchez,numchez)
 
 
      randnum = GetNum()
      #randnum = random.randint(0,9)
+     #numtak = numchez - 10
+     lownumz = (numchez)
 
-
-     innumz = ('Enter a number between 0 and 10: ')  
+     innumz = ('Enter a number between ' + str(farchez) + ' and ' + str(lownumz))  
 
 #def GiveNum():
 #     return raw_input(innumz)
