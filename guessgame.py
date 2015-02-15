@@ -3,6 +3,16 @@ import urwid
 #What numbers do you  want to guess. Guess between 0,10,
 #20,30 30,40 etc
 
+def exit_on_q(key):
+    if key in ('q', 'Q'):
+        raise urwid.ExitMainLoop()
+
+
+palette = [
+     ('banner', 'dark red', 'dark blue'),
+     ('streak', 'dark red', 'dark blue'),
+     ('bg', 'dark red', 'dark blue'),]
+
 numchez = 0
 
 for guesz in range(10):
@@ -32,8 +42,10 @@ for guesz in range(10):
      print randnum
      if guesintz == randnum:
           txt = urwid.Text('You Win!')
-          fill = urwid.Filler(txt, 'top')
-          loop = urwid.MainLoop(fill)
+          map1 = urwid.AttrMap(txt, 'streak')
+          fill = urwid.Filler(map1)
+          map2 = urwid.AttrMap(fill, 'bg')
+          loop = urwid.MainLoop(fill, palette, unhandled_input=exit_on_q)
           loop.run()
           print 'You Win!'
      else:
