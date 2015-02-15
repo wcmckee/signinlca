@@ -27,7 +27,7 @@ print f.renderText('pyguessgame')
 # In[3]:
 
 def exitq(key):
-    if key in ('q', 'Q'):
+    if key in ('enter', 'return'):
         raise urwid.ExitMainLoop()
 
 
@@ -73,7 +73,13 @@ for guesz in range(10):
         map2 = urwid.AttrMap(fil, 'bg')
         loop = urwid.MainLoop(fil, pallette, unhandled_input=exitq)
         loop.run()
-        print ('You Win!')
+        print f.renderText('You Win!')
     else:
-        print ('You Lose!')
+        txt = urwid.Text(f.renderText('You Lose!'))
+        map1 = urwid.AttrMap(txt, 'streak')
+        fil = urwid.Filler(map1)
+        map2 = urwid.AttrMap(fil, 'bg')
+        loop = urwid.MainLoop(fil, pallette, unhandled_input=exitq)
+        loop.run()
+        print f.renderText('You lose!')
 
