@@ -38,6 +38,11 @@ import arrow
 import hashlib
 
 
+# In[37]:
+
+from passlib.hash import pbkdf2_sha256
+
+
 # In[2]:
 
 gmtz = arrow.utcnow()
@@ -141,52 +146,69 @@ os.chdir(dayzpath)
 # 
 # Hash passwords
 
+# In[42]:
+
+import json
+
+
 # When creating account asked for username (which could be firstname + lastname), and password. Passwords are hashed and when user tries to login the password inputed is compared to the hashed password. 
 # 
 # Save that hash as a varible that is then complared with the saved hash password.
 
-# In[11]:
+# In[41]:
+
+opsign = open('/home/wcmckee/signinlca/index.json', 'w')
 
 
-
-
-# In[12]:
-
-from IPython.lib import passwd 
-
-
-# In[13]:
+# In[63]:
 
 signup = raw_input('signup y/n ')
+signupd = dict()
+
+
+
 if 'y' in signup:
     print('Welcome to signup!')
-
-
-# In[14]:
-
-if 'y' in signup:
+    
     firnam = raw_input('firstname: ')
+    signupd.update({"firstname":firnam, })
     lasnam = raw_input('last name: ')
+    
     usenam = raw_input('username: ')
-    passworz = passwd()
+    #passworz = passwd()
+    
+    pastest = getpass.getpass('password: ')
+
+    pasnde = getpass.getpass('enter password again: ')
+    
+    signupd.update({"firstname":firnam, "lastname":lasnam,
+                "username":usenam})
 
 
-# In[15]:
+# In[64]:
 
-decri = hashlib.sha512(firnam + lasnam)
-
-
-# In[16]:
-
-#decri.update('testing')
-
-
-# In[16]:
-
-
+hashez = pbkdf2_sha256.encrypt(pastest, rounds=200000, salt_size=16)
+loginpas = getpass.getpass('Password: ')
+vercryp = pbkdf2_sha256.verify(loginpas, hashez)
+if pastest == True:
+    print 'passwords correct'
+    
+else:
+    print 'passwords wrong'
+    #exit
 
 
-# In[17]:
+# In[49]:
+
+signupd
+
+
+# In[46]:
+
+dicsigni = dict()
+
+
+# In[47]:
 
 signin = raw_input('signin? y/n')
 
@@ -194,6 +216,10 @@ if 'y' in signin:
     uzname = raw_input('firstname: ')
     lzname = raw_input('lastname: ')
     uzernam = raw_input('username: ')
+    
+    dicsigni.update({'firstname': uzname, 'lastname': lzname,
+                   'username': uzernam})
+
     passwaz = passwd()
 
 
@@ -210,21 +236,6 @@ if 'y' in signin:
 # In[22]:
 
 firnam
-
-
-# In[23]:
-
-uzname
-
-
-# In[24]:
-
-rers = hashlib.sha512(raw_input('testing: '))
-
-
-# In[37]:
-
-from passlib.hash import pbkdf2_sha256
 
 
 # In[25]:
@@ -247,11 +258,6 @@ terbo = hashlib.sha1(usenam)
 usenam
 
 
-# In[28]:
-
-daetim = hashlib.sha1(rers.hexdigest())
-
-
 # In[29]:
 
 terbo.hexdigest()
@@ -264,45 +270,15 @@ firnam
 
 # In[31]:
 
-pastest = getpass.getpass('password: ')
 
-
-pasnde = getpass.getpass('enter password again: ')
 
 
 # In[32]:
 
-saltin = os.urandom(16)
-
-
-# In[33]:
-
-hpase = hashlib.md5()
-
-
-# In[34]:
-
-hpase.update(saltin + pastest)
-
-
-# In[35]:
-
-hpase.hexdigest()
-
-
-# In[38]:
-
-hashez = pbkdf2_sha256.encrypt(pastest, rounds=200000, salt_size=16)
-
-
-# In[39]:
-
-loginpas = getpass.getpass('Password: ')
-
-
-# In[40]:
-
-pbkdf2_sha256.verify(loginpas, hashez)
+#saltin = os.urandom(16)
+#hpase = hashlib.md5()
+#hpase.update(saltin + pastest)
+#hpase.hexdigest()
 
 
 # In[ ]:
@@ -310,23 +286,9 @@ pbkdf2_sha256.verify(loginpas, hashez)
 
 
 
-# In[492]:
-
-if pastest == pasnde:
-    print 'passwords correct'
-    
-else:
-    print 'passwords wrong'
-
-
-# In[488]:
-
-print pastest
-
-
 # In[471]:
 
-faetim = hashlib.sha1(firnam)
+#faetim = hashlib.sha1(firnam)
 
 
 # In[472]:
@@ -341,10 +303,10 @@ faetim = hashlib.sha1(firnam)
 
 # In[474]:
 
-if daetim.hexdigest == terbo.hexdigest:
-    print 'They are the same'
-else:
-    print 'they are not the same'
+#if daetim.hexdigest == terbo.hexdigest:
+#    print 'They are the same'
+#else:
+#    print 'they are not the same'
 
 
 # In[475]:
@@ -358,7 +320,7 @@ else:
 
 # In[476]:
 
-passworz
+#passworz
 
 
 # In[478]:
