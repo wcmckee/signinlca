@@ -1,0 +1,7 @@
+# IPython log file
+
+get_ipython().magic(u'logstart')
+import random
+#make a 10 random number list of between  0/10 working up to 100. eg. [12,25,35,45,55,65,73,87,93]
+ranumlis = []
+randumz = random.randint(0,9)

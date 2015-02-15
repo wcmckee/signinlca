@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[9]:
+# In[19]:
 
 import random
 import urwid
@@ -14,24 +14,24 @@ from pyfiglet import Figlet
 # On win a urwid screen shows with 'You Win'. It would be nice if the whole game was inside of urwid.
 # Figlet intergration. 
 
-# In[10]:
+# In[20]:
 
 f = Figlet()
 
 
-# In[11]:
+# In[21]:
 
 print f.renderText('pyguessgame')
 
 
-# In[3]:
+# In[ ]:
 
 def exitq(key):
     if key in ('enter', 'return'):
         raise urwid.ExitMainLoop()
 
 
-# In[5]:
+# In[ ]:
 
 pallette = [
     ('banner', 'dark red', 'dark blue'),
@@ -39,7 +39,7 @@ pallette = [
     ('bg', 'dark red', 'dark blue'),]
 
 
-# In[6]:
+# In[ ]:
 
 numchez = 0
 
@@ -67,19 +67,47 @@ for guesz in range(10):
     print ('Correct was: ' + str(randnum))
     
     if guesintz == randnum:
-        txt = urwid.Text(f.renderText('You Win!'))
+        txt = urwid.Text(f.renderText( guessnum + ' ' + str(randnum) + ' You Win!'))
+        numpor = urwid.Text(f.renderText(guessnum))
         map1 = urwid.AttrMap(txt, 'streak')
+        mep = urwid.AttrMap(numpor, 'streak')
         fil = urwid.Filler(map1)
+        fel = urwid.Filler(mep)
         map2 = urwid.AttrMap(fil, 'bg')
+        loopa = urwid.AttrMap(fel, 'bg')
+        looena = urwid.MainLoop(loopa, pallette, unhandled_input=exitq)
+        looena.run()
         loop = urwid.MainLoop(fil, pallette, unhandled_input=exitq)
         loop.run()
-        print f.renderText('You Win!')
+        print f.renderText(guessnum + ' ' + str(randnum) + ' You Win!')
     else:
-        txt = urwid.Text(f.renderText('You Lose!'))
+        txt = urwid.Text(f.renderText(guessnum + ' ' + str(randnum) + ' You Lose!'))
         map1 = urwid.AttrMap(txt, 'streak')
         fil = urwid.Filler(map1)
         map2 = urwid.AttrMap(fil, 'bg')
         loop = urwid.MainLoop(fil, pallette, unhandled_input=exitq)
         loop.run()
-        print f.renderText('You lose!')
+        print f.renderText(guessnum + ' ' + str(randnum) + ' You lose!')
+        
+
+
+# In[35]:
+
+txt = urwid.Text(f.renderText(guessnum + ' ' + str(randnum)))
+#numpor = urwid.Text(f.renderText(guessnum))
+map1 = urwid.AttrMap(txt, 'streak')
+#mep = urwid.AttrMap(numpor, 'streak')
+fil = urwid.Filler(map1)
+#fel = urwid.Filler(mep)
+map2 = urwid.AttrMap(fil, 'bg')
+#loopa = urwid.AttrMap(fel, 'bg')
+#looena = urwid.MainLoop(loopa, pallette, unhandled_input=exitq)
+#looena.run()
+loop = urwid.MainLoop(fil, pallette, unhandled_input=exitq)
+loop.run()
+
+
+# In[ ]:
+
+
 
