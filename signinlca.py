@@ -11,7 +11,24 @@
 # It creates a python dict with this data along with the current date and hour. 
 # It gets the username of user and saves the data in the users home dir under the folder signinlca. 
 # It saves the data as a json object.
-# Currently saves the file as firstname + lastname. Could this be improved?
+# Currently saves the file as firstname + lastname. 
+# 
+# How could this be improved? 
+# 
+# Signup/Signin System.
+# 
+# For signup - username, firstname, lastname, password(x2) is collected with input. Password is salted and hashed. 
+# Username, firstname, lastname, and password (salt/hash) is added to a dict. Dict is converted to a json object.
+# json object is saved as a json file in the folder signinlca / USERNAME-FOLDER / .signup.json
+# 
+# For signin. Username is collected with input. 
+# Looks for folder of username. Opens .signup.json file - parsing data. 
+# Save the value of 'password' as a varible.
+# 
+# Asks for password (getpass.getpass('Password please: ')
+# salt/hash this password.
+# save password attempt if error, otherwise true complete signin. 
+# 
 # 
 # 
 # TODO
@@ -34,13 +51,10 @@ import os
 import json
 import getpass
 import arrow
-
 import hashlib
-
-
-# In[37]:
-
 from passlib.hash import pbkdf2_sha256
+from walkdir import filtered_walk, dir_paths, all_paths, file_paths
+
 
 
 # In[2]:
@@ -146,21 +160,16 @@ os.chdir(dayzpath)
 # 
 # Hash passwords
 
-# In[42]:
-
-import json
-
-
 # When creating account asked for username (which could be firstname + lastname), and password. Passwords are hashed and when user tries to login the password inputed is compared to the hashed password. 
 # 
 # Save that hash as a varible that is then complared with the saved hash password.
 
-# In[41]:
+# In[12]:
 
 opsign = open('/home/wcmckee/signinlca/index.json', 'w')
 
 
-# In[63]:
+# In[13]:
 
 signup = raw_input('signup y/n ')
 signupd = dict()
@@ -175,6 +184,7 @@ if 'y' in signup:
     lasnam = raw_input('last name: ')
     
     usenam = raw_input('username: ')
+    os.mkdir('/home/wcmckee/signinlca/usernames/' + usenam) 
     #passworz = passwd()
     
     pastest = getpass.getpass('password: ')
@@ -183,24 +193,53 @@ if 'y' in signup:
     
     signupd.update({"firstname":firnam, "lastname":lasnam,
                 "username":usenam})
+    
+    hashez = pbkdf2_sha256.encrypt(pastest, rounds=200000, salt_size=16)
+    signupd.update({"password":hashez})
+    
+    savjsn = open('/home/wcmckee/signinlca/usernames/' + usenam + '/.signups.json', 'a')
+    jsncov = json.dumps(signupd)
+    savjsn.write(jsncov)
+    savjsn.close()
+    print('Signup Complete. You can now signin with the username and password')
 
 
-# In[64]:
+# In[14]:
 
-hashez = pbkdf2_sha256.encrypt(pastest, rounds=200000, salt_size=16)
+#hashez = pbkdf2_sha256.encrypt(pastest, rounds=200000, salt_size=16)
+#signupd.update({"password":hashez})
+#signin. need to open 
+print ('signin!')
+loginam = raw_input('Username: ')
+#Open logins.json, find the username json object
 loginpas = getpass.getpass('Password: ')
 vercryp = pbkdf2_sha256.verify(loginpas, hashez)
-if pastest == True:
-    print 'passwords correct'
+if vercryp == True:
+    print 'passwords correct - Logged in!'
     
 else:
-    print 'passwords wrong'
+    print 'passwords wrong - Could not log!'
     #exit
 
 
-# In[49]:
+# In[15]:
 
-signupd
+type(signupd)
+
+
+# In[15]:
+
+
+
+
+# In[16]:
+
+savjsn.write(jsncov)
+
+
+# In[17]:
+
+savjsn.close()
 
 
 # In[46]:
@@ -208,110 +247,23 @@ signupd
 dicsigni = dict()
 
 
-# In[47]:
+# In[96]:
 
 signin = raw_input('signin? y/n')
 
 if 'y' in signin:
-    uzname = raw_input('firstname: ')
-    lzname = raw_input('lastname: ')
+    #uzname = raw_input('firstname: ')
+    #lzname = raw_input('lastname: ')
     uzernam = raw_input('username: ')
     
-    dicsigni.update({'firstname': uzname, 'lastname': lzname,
-                   'username': uzernam})
+    dicsigni.update({'username': uzernam})
 
-    passwaz = passwd()
-
-
-# In[20]:
-
-#passworz
-
-
-# In[21]:
-
-#passworz
-
-
-# In[22]:
-
-firnam
-
-
-# In[25]:
-
-decri.hexdigest()
-
-
-# In[26]:
-
-terbo = hashlib.sha1(usenam)
-
-
-# In[26]:
-
-
-
-
-# In[27]:
-
-usenam
-
-
-# In[29]:
-
-terbo.hexdigest()
-
-
-# In[30]:
-
-firnam
-
-
-# In[31]:
-
-
-
-
-# In[32]:
-
-#saltin = os.urandom(16)
-#hpase = hashlib.md5()
-#hpase.update(saltin + pastest)
-#hpase.hexdigest()
-
-
-# In[ ]:
-
-
-
-
-# In[471]:
-
-#faetim = hashlib.sha1(firnam)
-
-
-# In[472]:
-
-#daetim.hexdigest()
-
-
-# In[473]:
-
-#faetim.hexdigest()
-
-
-# In[474]:
-
-#if daetim.hexdigest == terbo.hexdigest:
-#    print 'They are the same'
-#else:
-#    print 'they are not the same'
-
-
-# In[475]:
-
-#m.hexdigest()
+    logtest = getpass.getpass('login password: ')
+    loghash = pbkdf2_sha256.encrypt(logtest, rounds=200000, salt_size=16)
+    vercryp = pbkdf2_sha256.verify(logtest, hashez)
+    dicsigni.update({'password':loghash})
+    if pastest == True:
+        print 'passwords correct'
 
 
 # I have their signin data. Now what to do with it? Save it as a json object to be then used when they signin later? 
@@ -323,7 +275,7 @@ firnam
 #passworz
 
 
-# In[478]:
+# In[118]:
 
 loginz = raw_input('signin y/n ')
 if 'y' in loginz:
@@ -333,7 +285,7 @@ else:
     logoutz = raw_input('signouts y/n ')
 
 
-# In[479]:
+# In[119]:
 
 if 'y' in loginz:
     firnam = raw_input('first name: ')
@@ -342,9 +294,7 @@ if 'y' in loginz:
     cofvol = raw_input('coffee volc: ')
     comen = raw_input('comments: ')
     betdict = dict()
-    betdict.update({'first-name' : firnam})
-    betdict.update({'last-name' : lasnam})
-    betdict.update({'signin-date' : returndate()})
+    betdict.update({'first-name' : firnam, 'last-name' : lasnam, 'signin-date' : returndate()})
     betdict.update({'signin-hrmin' : returntime()})
     betdict.update({'tshirt-size' : tshir})
     betdict.update({'coffees' : int(cofvol)})
@@ -388,8 +338,6 @@ os.listdir(dayzpath)
 
 
 # In[482]:
-
-from walkdir import filtered_walk, dir_paths, all_paths, file_paths
 
 files = file_paths(filtered_walk('/home/wcmckee/signinlca/', depth=100, included_files=['*.json']))
 
