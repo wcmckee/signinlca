@@ -1,12 +1,15 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[65]:
 
 import random
 import urwid
 import os
 from pyfiglet import Figlet
+import json
+import random
+import clint
 
 
 # 
@@ -16,64 +19,104 @@ from pyfiglet import Figlet
 # On win a urwid screen shows with 'You Win'. It would be nice if the whole game was inside of urwid.
 # Figlet intergration. 
 
-# In[21]:
+# In[39]:
 
 f = Figlet()
 
 
-# In[22]:
+# In[40]:
 
 opusr = os.listdir('/home/wcmckee/signinlca/usernames/')
 
 
-# In[23]:
-
-import random
+# In[40]:
 
 
-# In[24]:
+
+
+# In[41]:
 
 opusr
 
 
-# In[25]:
+# In[42]:
 
 ranumz = len(opusr)
 
 
-# In[26]:
+# In[43]:
 
 ranin = random.randint(0, ranumz)
 
 
-# In[27]:
+# In[44]:
 
 ranin
 
 
-# In[28]:
+# In[45]:
 
 opza =  opusr[ranin]
 
 
-# In[29]:
+# In[46]:
 
 opza
 
 
-# In[29]:
+# In[47]:
+
+lidte = open('/home/wcmckee/signinlca/usernames/' + opza + '/.signups.json', 'r')
+
+
+# In[48]:
+
+plid = lidte.read()
+
+
+# In[51]:
+
+tlid = json.loads(plid)
+
+
+# In[64]:
+
+firna = tlid['firstname']
+
+
+# In[ ]:
 
 
 
 
-# In[30]:
+# In[60]:
 
-ranumz
+tlicha = tlid['lastname']
 
 
-# In[31]:
+# In[66]:
+
+fullna = firna + ' ' + tlicha
+
+
+# In[67]:
+
+from clint.textui import colored, puts
+
+perf = puts(colored.yellow(fullna))
+
+perf
+
+
+# In[63]:
 
 print f.renderText(opza)
+print fullna
+
+
+# In[ ]:
+
+
 
 
 # In[38]:
@@ -86,9 +129,9 @@ def exitq(key):
 # In[39]:
 
 pallette = [
-    ('banner', 'dark red', 'dark blue'),
-    ('streak', 'dark red', 'dark blue'),
-    ('bg', 'dark red', 'dark blue'),]
+    ('banner', 'dark red', 'white'),
+    ('streak', 'dark red', 'white'),
+    ('bg', 'dark red', 'white'),]
 
 
 # In[40]:
@@ -161,5 +204,5 @@ loop.run()
 
 # In[ ]:
 
-
+print 'The End'
 
