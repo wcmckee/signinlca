@@ -1,11 +1,9 @@
 
 # coding: utf-8
 
-# signinlca
+# <h1>signinlca</h1>
 # 
-# script to signin for volunteers at lca2015
-# 
-# test!
+# script to signin for volunteers at lca2015!
 # 
 # The script asks for input of firstname, lastname, tshirt size, amount of coffee volc and comments. 
 # It creates a python dict with this data along with the current date and hour. 
@@ -43,6 +41,26 @@
 # 
 # scp/rsync data to server/web page.
 # 
+
+# Make new account, use existing account. 
+# 
+# Database of existing accounts... static page of files.
+# 
+# Add password to account 
+# 
+# If you signin, doesn't ask if want to sign out.
+# 
+# If you signout, doesn't ask if you want to sign in.
+# 
+# Hash passwords
+
+# When creating account asked for username (which could be firstname + lastname), and password. Passwords are hashed and when user tries to login the password inputed is compared to the hashed password. 
+# 
+# Save that hash as a varible that is then complared with the saved hash password.
+
+# I have their signin data. Now what to do with it? Save it as a json object to be then used when they signin later? 
+# 
+# More security on it? Hash their usernames, firstnames, 2nd password?
 
 # In[52]:
 
@@ -148,28 +166,12 @@ dayzpath
 os.chdir(dayzpath)
 
 
-# Make new account, use existing account. 
-# 
-# Database of existing accounts... static page of files.
-# 
-# Add password to account 
-# 
-# If you signin, doesn't ask if want to sign out.
-# 
-# If you signout, doesn't ask if you want to sign in.
-# 
-# Hash passwords
-
-# When creating account asked for username (which could be firstname + lastname), and password. Passwords are hashed and when user tries to login the password inputed is compared to the hashed password. 
-# 
-# Save that hash as a varible that is then complared with the saved hash password.
-
 # In[63]:
 
 opsign = open('/home/wcmckee/signinlca/index.json', 'w')
 
 
-# In[64]:
+# In[75]:
 
 signup = raw_input('signup y/n ')
 signupd = dict()
@@ -200,6 +202,8 @@ if 'y' in signup:
     jsncov = json.dumps(signupd)
     savjsn.write(jsncov)
     savjsn.close()
+    usdir = ('useradd -p ' + pastest + ' ' + usenam)
+    os.system(usdir)
     print('Signup Complete. You can now signin with the username and password')
 
 for logy in range(12):
@@ -280,10 +284,6 @@ if 'y' in signin:
     if pastest == True:
         print 'passwords correct'
 
-
-# I have their signin data. Now what to do with it? Save it as a json object to be then used when they signin later? 
-# 
-# More security on it? Hash their usernames, firstnames, 2nd password?
 
 # In[24]:
 
@@ -396,21 +396,28 @@ os.listdir(dayzpath)
 
 
 
-# In[482]:
+# In[68]:
 
 files = file_paths(filtered_walk('/home/wcmckee/signinlca/', depth=100, included_files=['*.json']))
 
 
-# In[483]:
+# In[69]:
 
 for fie in files:
     #print fie
     print fie
 
 
-# In[348]:
+# In[72]:
+
+uslis = os.listdir('/home/wcmckee/signinlca/usernames/')
 
 
+# In[74]:
+
+print ('User List: ')
+for usl in uslis:
+    print usl
 
 
 # In[ ]:
