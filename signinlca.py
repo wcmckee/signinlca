@@ -44,7 +44,7 @@
 # scp/rsync data to server/web page.
 # 
 
-# In[1]:
+# In[52]:
 
 import os
 #import time
@@ -57,12 +57,12 @@ from walkdir import filtered_walk, dir_paths, all_paths, file_paths
 
 
 
-# In[2]:
+# In[53]:
 
 gmtz = arrow.utcnow()
 
 
-# In[3]:
+# In[54]:
 
 yrmt = gmtz.strftime("%Y")
 mthza = gmtz.strftime("%m")
@@ -73,22 +73,22 @@ gmtz.strftime("%Y")
 #dayz = strftime("%d", gmtime())
 
 
-# In[4]:
+# In[55]:
 
 yrmt
 
 
-# In[5]:
+# In[56]:
 
 mthza
 
 
-# In[6]:
+# In[57]:
 
 dthaq
 
 
-# In[7]:
+# In[58]:
 
 def returndate():
     return (dthaq + '-' + mthza + '-' + yrmt)
@@ -108,7 +108,7 @@ mnthpath = (yrpath + '/' + mnthnum)
 dayzpath = (mnthpath + '/' + dayzum)
 
 
-# In[8]:
+# In[59]:
 
 if os.path.isdir(signpath) == True:
     print 'Path is there'
@@ -117,7 +117,7 @@ else:
     os.mkdir(signpath)
 
 
-# In[9]:
+# In[60]:
 
 if os.path.isdir(yrpath) == True:
     print 'Year Path is there'
@@ -138,12 +138,12 @@ else:
     os.mkdir(dayzpath)
 
 
-# In[10]:
+# In[61]:
 
 dayzpath
 
 
-# In[11]:
+# In[62]:
 
 os.chdir(dayzpath)
 
@@ -164,21 +164,20 @@ os.chdir(dayzpath)
 # 
 # Save that hash as a varible that is then complared with the saved hash password.
 
-# In[12]:
+# In[63]:
 
 opsign = open('/home/wcmckee/signinlca/index.json', 'w')
 
 
-# In[13]:
+# In[64]:
 
 signup = raw_input('signup y/n ')
 signupd = dict()
 
-
+numchez = 0
 
 if 'y' in signup:
     print('Welcome to signup!')
-    
     firnam = raw_input('firstname: ')
     signupd.update({"firstname":firnam, })
     lasnam = raw_input('last name: ')
@@ -203,8 +202,14 @@ if 'y' in signup:
     savjsn.close()
     print('Signup Complete. You can now signin with the username and password')
 
+for logy in range(12):
+    ferzr = (numchez)
+    numchez = (numchez + 10)
+    #usfaz = ('/home/wcmckee/signinlca/usernames/' + str(numchez) + usenam + '/index.json', 'w')
+    os.mkdir('/home/wcmckee/signinlca/usernames/' + str(usenam) + '/' + str(logy))
 
-# In[14]:
+
+# In[65]:
 
 #hashez = pbkdf2_sha256.encrypt(pastest, rounds=200000, salt_size=16)
 #signupd.update({"password":hashez})
@@ -222,32 +227,32 @@ else:
     #exit
 
 
-# In[15]:
+# In[66]:
 
 type(signupd)
 
 
-# In[15]:
+# In[66]:
 
 
 
 
-# In[16]:
+# In[67]:
 
-savjsn.write(jsncov)
+#savjsn.write(jsncov)
 
 
 # In[17]:
 
-savjsn.close()
+#savjsn.close()
 
 
-# In[46]:
+# In[19]:
 
 dicsigni = dict()
 
 
-# In[96]:
+# In[21]:
 
 signin = raw_input('signin? y/n')
 
@@ -257,11 +262,21 @@ if 'y' in signin:
     uzernam = raw_input('username: ')
     
     dicsigni.update({'username': uzernam})
+    opsignin = open('/home/wcmckee/signinlca/usernames/' + str(uzernam) + ('/') + ('.signin.json'), 'w') 
 
     logtest = getpass.getpass('login password: ')
     loghash = pbkdf2_sha256.encrypt(logtest, rounds=200000, salt_size=16)
     vercryp = pbkdf2_sha256.verify(logtest, hashez)
     dicsigni.update({'password':loghash})
+                    
+    dicjsn = json.dumps(dicsigni)
+    
+    opsignin.write(dicjsn)
+    opsignin.close()
+    
+                    
+    #opsignin.write
+
     if pastest == True:
         print 'passwords correct'
 
@@ -270,9 +285,53 @@ if 'y' in signin:
 # 
 # More security on it? Hash their usernames, firstnames, 2nd password?
 
-# In[476]:
+# In[24]:
 
-#passworz
+ersignin = open('/home/wcmckee/signinlca/usernames/' + str(uzernam) + ('/') + ('.signin.json'), 'r') 
+
+paswz = ersignin.read()
+
+
+# In[28]:
+
+dicvert = json.loads(paswz)
+
+
+# In[49]:
+
+dicloin = dicvert['password']
+
+
+# In[39]:
+
+tresignin = open('/home/wcmckee/signinlca/usernames/' + str(uzernam) + ('/') + ('.signups.json'), 'r')
+
+
+
+# In[40]:
+
+
+convea =  tresignin.read()
+
+
+# In[43]:
+
+jsnver = json.loads(convea)
+
+
+# In[47]:
+
+jpas = jsnver['password']
+
+
+# In[50]:
+
+jpas
+
+
+# In[51]:
+
+dicloin
 
 
 # In[118]:
