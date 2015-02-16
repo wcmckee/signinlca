@@ -1,37 +1,89 @@
 
 # coding: utf-8
 
-# In[19]:
+# In[1]:
 
 import random
 import urwid
-
+import os
 from pyfiglet import Figlet
 
+
+# 
 
 # Started as a simple python guessing game to be ran in terminal. 
 # Asks for a number between 0-10 and works up to 100 - asking for the next 10 each time. 
 # On win a urwid screen shows with 'You Win'. It would be nice if the whole game was inside of urwid.
 # Figlet intergration. 
 
-# In[20]:
+# In[21]:
 
 f = Figlet()
 
 
-# In[21]:
+# In[22]:
 
-print f.renderText('pyguessgame')
+opusr = os.listdir('/home/wcmckee/signinlca/usernames/')
 
 
-# In[ ]:
+# In[23]:
+
+import random
+
+
+# In[24]:
+
+opusr
+
+
+# In[25]:
+
+ranumz = len(opusr)
+
+
+# In[26]:
+
+ranin = random.randint(0, ranumz)
+
+
+# In[27]:
+
+ranin
+
+
+# In[28]:
+
+opza =  opusr[ranin]
+
+
+# In[29]:
+
+opza
+
+
+# In[29]:
+
+
+
+
+# In[30]:
+
+ranumz
+
+
+# In[31]:
+
+print f.renderText(opza)
+
+
+# In[38]:
 
 def exitq(key):
     if key in ('enter', 'return'):
         raise urwid.ExitMainLoop()
 
 
-# In[ ]:
+# In[39]:
 
 pallette = [
     ('banner', 'dark red', 'dark blue'),
@@ -39,12 +91,12 @@ pallette = [
     ('bg', 'dark red', 'dark blue'),]
 
 
-# In[ ]:
+# In[40]:
 
 numchez = 0
 
 
-# In[ ]:
+# In[48]:
 
 for guesz in range(10):
     farchez = (numchez)
