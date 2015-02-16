@@ -159,6 +159,7 @@ for guesz in range(10):
     guesintz = int(guessnum)
     
     print ('Guess was: ' + str(guesintz))
+    #colomod
     print ('Correct was: ' + str(randnum))
     
     if guesintz == randnum:

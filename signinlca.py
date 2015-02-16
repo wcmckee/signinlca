@@ -114,7 +114,7 @@ def returndate():
 def returntime():
     return gmtz.strftime('%H:%M:%S')
 
-puser = getpass.getuser()
+puser = ('wcmckee')
 
 yrnum = gmtz.strftime("%Y")
 mnthnum = gmtz.strftime("%m")
@@ -171,7 +171,7 @@ os.chdir(dayzpath)
 opsign = open('/home/wcmckee/signinlca/index.json', 'w')
 
 
-# In[75]:
+# In[77]:
 
 signup = raw_input('signup y/n ')
 signupd = dict()
@@ -185,6 +185,9 @@ if 'y' in signup:
     lasnam = raw_input('last name: ')
     
     usenam = raw_input('username: ')
+    emnam = raw_input('email: ')
+    
+    
     os.mkdir('/home/wcmckee/signinlca/usernames/' + usenam) 
     #passworz = passwd()
     
@@ -196,7 +199,9 @@ if 'y' in signup:
                 "username":usenam})
     
     hashez = pbkdf2_sha256.encrypt(pastest, rounds=200000, salt_size=16)
-    signupd.update({"password":hashez})
+    emhash = pbkdf2_sha256.encrypt(emnam, rounds=200000, salt_size=16)
+    
+    signupd.update({"password":hashez, "email":emhash})
     
     savjsn = open('/home/wcmckee/signinlca/usernames/' + usenam + '/.signups.json', 'a')
     jsncov = json.dumps(signupd)
