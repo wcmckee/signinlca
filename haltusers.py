@@ -36,12 +36,12 @@ os.listdir(hostndir)
 chosd = os.chdir(hostndir)
 
 
-# In[15]:
+# In[6]:
 
 os.system('hostname > host.txt')
 
 
-# In[11]:
+# In[7]:
 
 rdhos = open('host.txt', 'r')
 
@@ -50,46 +50,56 @@ rdtxt = rdhos.read()
 rdhos.close()
 
 
-# In[13]:
+# In[8]:
 
 rdstp = rdtxt.strip('\n')
 
 
-# In[14]:
+# In[9]:
 
 rdstp
 
 
-# In[ ]:
+# In[9]:
 
 
 
 
-# In[16]:
+# In[10]:
 
 os.system('users > ' + rdstp)
 
 
-# In[ ]:
+# In[11]:
 
 os.system('rm -rf host.txt')
 
 
-# In[20]:
+# In[ ]:
 
-whatip = raw_input('What ip address to rsync to: ')
-
-whaint = int(whatip)
+print ('script success')
 
 
-# In[22]:
+# In[12]:
 
-os.system('rsync -azP /home/wcmckee/sellcoffee/ wcmckee@192.168.1.' + str(whaint) +':/home/wcmckee/sellcoffee')
+#whatip = raw_input('What ip address to rsync to: ')
+
+#whaint = int(whatip)
 
 
-# In[24]:
+# In[13]:
 
-os.system('rsync -azP /home/wcmckee/github/ wcmckee@192.168.1.' + str(whaint) + ':/home/wcmckee/github/')
+#os.system('rsync -azP /home/wcmckee/sellcoffee/ wcmckee@192.168.1.2:/home/wcmckee/sellcoffee/')
+
+
+# In[14]:
+
+#os.system('rsync -azP /home/wcmckee/signinlca/ wcmckee@192.168.1.2:/home/wcmckee/signinlca/')
+
+
+# In[15]:
+
+#os.system('rsync -azP /home/wcmckee/github/ wcmckee@192.168.1.2:/home/wcmckee/github/')
 
 
 # In[ ]:
