@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[106]:
+# In[2]:
 
 #check username for minutes file. minutes file is the amount of
 #mins on username.
@@ -10,24 +10,24 @@
 #that are logged on.
 
 
-# In[107]:
+# In[1]:
 
 import os
 
 
-# In[108]:
+# In[2]:
 
 allusr = os.listdir('/home')
 
 
-# In[109]:
+# In[3]:
 
 allusr
 
 usrslcd = ('/home/wcmckee/signinlca/usernames/')
 
 
-# In[110]:
+# In[4]:
 
 #write a file in the home folder of each user that 
 #is the amount of mins they used.
@@ -36,27 +36,27 @@ usrslcd = ('/home/wcmckee/signinlca/usernames/')
 
 
 
-# In[111]:
+# In[5]:
 
 usrdict = dict()
 
 
-# In[112]:
+# In[6]:
 
 usrdict
 
 
-# In[113]:
+# In[7]:
 
 hostndir = ('/home/wcmckee/sellcoffee/hostnames/')
 
 
-# In[114]:
+# In[8]:
 
 hosnz = os.listdir(hostndir)
 
 
-# In[115]:
+# In[9]:
 
 for hosz in hosnz:
     print hosz
@@ -65,35 +65,12 @@ for hosz in hosnz:
     hopen.close()
 
 
-# In[116]:
-
-for usz in usrdict.values():
-    newgz = usz.split()
-    #print newgz
-    for ussa in newgz:
-        print ussa
-        if ('wcmckee') in ussa:
-            print ('wcmckee logged in')
-        else:
-            print ('not logged in!')
-
-
-# In[117]:
-
-#newgz
-
-
-# In[ ]:
-
-
-
-
-# In[118]:
+# In[10]:
 
 totlis = []
 
 
-# In[119]:
+# In[11]:
 
 for usrval in usrdict.values():
     totlis.append(usrval.split())
@@ -107,12 +84,12 @@ for usrval in usrdict.values():
         #print uza
 
 
-# In[ ]:
+# In[12]:
+
+totlis
 
 
-
-
-# In[132]:
+# In[13]:
 
 for totz in totlis:
     #print totz
@@ -129,17 +106,34 @@ for totz in totlis:
         #edit minutes folder with +1 min
 
 
+# In[13]:
+
+
+
+
+# In[14]:
+
+#rsetmin = raw_input('Reset minutes to 0? y/n ')
+
+#if 'y' in rsetmin:
+#    for alu in allusr:
+#        print alu
+#        mktimfold = open(usrslcd + alu + '/minutes', 'w')
+#        mktimfold.write('0')
+#        mktimfold.close()
+
+
+# In[15]:
+
+
+
+
+# In[15]:
+
+
+
+
 # In[ ]:
 
 
-
-
-# In[121]:
-
-for alu in allusr:
-    
-    print alu
-    mktimfold = open(usrslcd + alu + '/minutes', 'w')
-    mktimfold.write('0')
-    mktimfold.close()
 

@@ -28,24 +28,13 @@
 # In[1]:
 
 import os
-
-
-# In[ ]:
-
-os.system('rsync -azP 192.168.1.2:/home/wcmckee /home/wcmckee')
-
-
-# In[4]:
-
-os.system('rsync -azP /home/wcmckee wcmckee@192.168.1.2:/home/wcmckee')
-
-
-# In[ ]:
-
-os.system('rsync -azP 192.168.1.8:/home/wcmckee /home/wcmckee')
-
-
-# In[ ]:
-
-os.system('rsync -azP /home/wcmckee wcmckee@192.168.1.8:/home/wcmckee')
+import time 
+while 1 == 1:
+    os.system('rsync -azP 192.168.1.2:/home/wcmckee /home/wcmckee')
+    os.system('rsync -azP /home/wcmckee wcmckee@192.168.1.2:/home/wcmckee')
+    os.system('rsync -azP 192.168.1.8:/home/wcmckee /home/wcmckee')
+    os.system('rsync -azP /home/wcmckee wcmckee@192.168.1.8:/home/wcmckee')
+    os.system('rsync -azP /home/wcmckee wcmckee@192.168.1.7:/home/wcmckee')
+    os.system('rsync -azP wcmckee@192.168.1.7:/home/wcmckee /home/wcmckee')
+    time.sleep(240)
 
