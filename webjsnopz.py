@@ -5,7 +5,7 @@
 # 
 # opens up json data and saves index.html.
 
-# In[34]:
+# In[61]:
 
 import json
 import os
@@ -16,24 +16,24 @@ from dominate.tags import *
 import arrow
 
 
-# In[2]:
+# In[62]:
 
 rdcompz = open('/home/wcmckee/sellcoffee/comps.json', 'r')
 
 rdstrza = rdcompz.read()
 
 
-# In[3]:
+# In[63]:
 
 rdstrza
 
 
-# In[7]:
+# In[64]:
 
 strzadic = json.loads(rdstrza)
 
 
-# In[8]:
+# In[65]:
 
 strzadic
 
@@ -43,31 +43,31 @@ strzadic
 
 
 
-# In[20]:
+# In[66]:
 
 minszlen = '/home/wcmckee/sellcoffee/mins/'
 
 hoszlen = '/home/wcmckee/sellcoffee/hostnames/'
 
 
-# In[23]:
+# In[67]:
 
 hoslidz = os.listdir(hoszlen)
 
 
-# In[ ]:
+# In[68]:
 
 #rdminza = open(minszlen + jsd, 'r')
 
 
-# In[9]:
+# In[69]:
 
 rdminz = open('/home/wcmckee/sellcoffee/minutes.json', 'r')
 
 jsdaz = json.loads(rdminz.read())
 
 
-# In[25]:
+# In[70]:
 
 for hosld in hoslidz:
     print hosld
@@ -77,17 +77,17 @@ for hosld in hoslidz:
     rdhoz.close()
 
 
-# In[ ]:
+# In[71]:
 
 #rdhoz = open(hoszlen + )
 
 
-# In[10]:
+# In[72]:
 
 #rdminz
 
 
-# In[15]:
+# In[73]:
 
 for jsd in jsdaz:
     print jsd
@@ -97,47 +97,47 @@ for jsd in jsdaz:
     rdminza.close()
 
 
-# In[35]:
+# In[74]:
 
 gtim = arrow.now()
 
 
-# In[39]:
+# In[75]:
 
 import getpass
 
 
-# In[40]:
+# In[76]:
 
 gusr = getpass.getuser
 
 
-# In[42]:
+# In[77]:
 
 gusr()
 
 
-# In[54]:
+# In[78]:
 
 updatz = ('Updated by ' + gusr() + ' on ')
 
 
-# In[55]:
+# In[79]:
 
 str(gtim.datetime)
 
 
-# In[56]:
+# In[80]:
 
 updatz
 
 
-# In[57]:
+# In[81]:
 
 jsdaz
 
 
-# In[58]:
+# In[82]:
 
 doc = dominate.document(title='BroBeur Minutes')
 
@@ -197,20 +197,25 @@ with doc:
 #print doc
 
 
-# In[59]:
+# In[83]:
 
 print doc
 
 
-# In[60]:
+# In[85]:
 
 docre = doc.render()
 #s = docre.decode('ascii', 'ignore')
 yourstring = docre.encode('ascii', 'ignore').decode('ascii')
-indfil = ('/home/wcmckee/index.html')
+indfil = ('/home/wcmckee/sellcoffee/index.html')
 mkind = open(indfil, 'w')
 mkind.write(yourstring)
 mkind.close()
+
+
+# In[ ]:
+
+
 
 
 # In[ ]:
