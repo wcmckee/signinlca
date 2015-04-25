@@ -7,7 +7,7 @@
 # 
 # 
 
-# In[29]:
+# In[18]:
 
 import os
 from datetime import datetime
@@ -21,22 +21,22 @@ minsfold = "/home/wcmckee/sellcoffee/mins/"
 #print datetime.fromtimestamp(modifiedTime).strftime("%d%b%Y %H:%M:%S")
 
 
-# In[3]:
+# In[19]:
 
 minlis = os.listdir(minsfold)
 
 
-# In[10]:
+# In[20]:
 
 rdminz = []
 
 
-# In[11]:
+# In[21]:
 
 mindictz = dict()
 
 
-# In[12]:
+# In[22]:
 
 for minl in minlis:
     print minl
@@ -46,37 +46,49 @@ for minl in minlis:
     opminza.close()
 
 
-# In[13]:
+# In[23]:
 
 rdminz
 
 
-# In[14]:
+# In[24]:
 
 mindictz
 
 
-# In[17]:
+# In[25]:
 
 lshosnz = ('/home/wcmckee/sellcoffee/hostnames/')
 
 
-# In[19]:
+# In[26]:
 
 complisz = os.listdir(lshosnz)
 
 
-# In[21]:
+# In[27]:
 
 compdict = dict()
 
 
-# In[28]:
+# In[30]:
 
-json.dumps(mindictz)
+minjson = json.dumps(mindictz)
 
 
-# In[24]:
+# In[32]:
+
+savjsmin = open('/home/wcmckee/sellcoffee/minutes.json', 'w')
+
+savjsmin.write(minjson)
+
+
+# In[33]:
+
+savjsmin.close()
+
+
+# In[29]:
 
 for compl in complisz:
     print compl
@@ -85,14 +97,35 @@ for compl in complisz:
     opcompd.close()
 
 
-# In[25]:
-
-compdict
+# In[17]:
 
 
-# In[27]:
 
-json.dumps(compdict)
+
+# In[34]:
+
+compjsq = json.dumps(compdict)
+
+
+# In[35]:
+
+savjsnusr = open('/home/wcmckee/sellcoffee/comps.json', 'w')
+
+savjsnusr.write(compjsq)
+
+savjsnusr.close()
+
+
+# In[36]:
+
+rdcompz = open('/home/wcmckee/sellcoffee/comps.json', 'r')
+
+rdstrza = rdcompz.read()
+
+
+# In[37]:
+
+rdstrza
 
 
 # In[ ]:

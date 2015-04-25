@@ -12,7 +12,7 @@
 # This is the client machine - all slaves get their data sent to this.
 # This script should run every min on the client machine. 
 
-# In[60]:
+# In[29]:
 
 import json
 import os
@@ -20,28 +20,31 @@ import os
 import socket
 myhosn = socket.gethostname()
 
+import dominate
+from dominate.tags import * 
+
 
 # In[ ]:
 
 
 
 
-# In[61]:
+# In[2]:
 
 #rdmins
 
 
-# In[62]:
+# In[3]:
 
 intres = []
 
 
-# In[63]:
+# In[4]:
 
 curmins = dict()
 
 
-# In[67]:
+# In[5]:
 
 #for rdm in rdmins:
     #print rdm
@@ -54,7 +57,7 @@ curmins = dict()
     #print int(1) + int(5)
 
 
-# In[68]:
+# In[6]:
 
 #curmins
 
@@ -64,28 +67,28 @@ curmins = dict()
 
 
 
-# In[69]:
+# In[7]:
 
 #intres
 
 
-# In[70]:
+# In[8]:
 
 holisz = os.listdir('/home/wcmckee/sellcoffee/hostnames/')
 
 
-# In[71]:
+# In[9]:
 
 #holisz
 
 
-# In[72]:
+# In[10]:
 
 develist = []
 os.listdir('/home/wcmckee/sellcoffee/usernames/')
 
 
-# In[73]:
+# In[11]:
 
 rdhoszr = open('/home/wcmckee/sellcoffee/usernames/' + myhosn + '-minutes', 'r')
 tesred = rdhoszr.read()
@@ -95,7 +98,7 @@ rdhoszr.close()
     
 
 
-# In[74]:
+# In[12]:
 
 #for curmiz in curmins:
     #print curmiz
@@ -103,7 +106,7 @@ rdhoszr.close()
 # #       print cuz
 
 
-# In[75]:
+# In[13]:
 
 for deusr in develist:
     print deusr
@@ -112,29 +115,29 @@ for deusr in develist:
     
 
 
-# In[76]:
+# In[14]:
 
 #rdhoszr = open('/home/wcmckee/sellcoffee/hostnames/' + )
 
 
-# In[77]:
+# In[15]:
 
 for intr in intres:
     print int(intr) + 1
 
 
-# In[78]:
+# In[16]:
 
 allhost = os.listdir('/home/wcmckee/sellcoffee/hostnames/')
 
 
-# In[79]:
+# In[17]:
 
 usrzlogd = []
 usrdict = dict()
 
 
-# In[80]:
+# In[18]:
 
 for alhos in allhost:
     print alhos
@@ -144,12 +147,12 @@ for alhos in allhost:
     
 
 
-# In[81]:
+# In[19]:
 
 rdza.close()
 
 
-# In[82]:
+# In[20]:
 
 for alhos in allhost:
     print alhos
@@ -159,30 +162,30 @@ for alhos in allhost:
     
 
 
-# In[83]:
+# In[21]:
 
 usrzlogz = usrdict.values()
 
 
-# In[84]:
+# In[22]:
 
 thusrz = []
 chedct = dict()
 usrzlogedin = []
 
 
-# In[85]:
+# In[23]:
 
 #usrdict
 #The lists of each computer only need 
 
 
-# In[86]:
+# In[24]:
 
 myhosn = socket.gethostname()
 
 
-# In[87]:
+# In[25]:
 
 #Checks users logged on to local machine and add 1 min to 
 rdmins = os.listdir('/home/wcmckee/sellcoffee/mins/')
@@ -192,7 +195,7 @@ rdmins = os.listdir('/home/wcmckee/sellcoffee/mins/')
 #that is show. add + 1 to the number.
 
 
-# In[88]:
+# In[26]:
 
 #checks users logged on and if user is logged on the add 1 min to
 #their name in mins folder.
@@ -203,7 +206,12 @@ for intr in intres:
     rdmz.write(str(int(intr) + 1))
 
 
-# In[89]:
+# In[27]:
+
+usrdict
+
+
+# In[35]:
 
 for usrza in usrdict.values():
     seusr = set(usrza)
@@ -224,9 +232,16 @@ for usrza in usrdict.values():
             
         usrzlogedin.append(strz)
         #chedct.update({usrdict.keys() : strz})
+        
 
 
-# In[ ]:
+# In[34]:
+
+for usrzl in usrzlogedin:
+    print usrzl
+
+
+# In[201]:
 
 #chdict.update()
 
