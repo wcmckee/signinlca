@@ -16,7 +16,7 @@
 
 import json
 import os
-import configparser
+#import configparser
 import socket
 myhosn = socket.gethostname()
 
