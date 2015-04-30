@@ -5,7 +5,7 @@
 # 
 # opens up json data and saves index.html.
 
-# In[61]:
+# In[23]:
 
 import json
 import os
@@ -15,25 +15,52 @@ from dominate.tags import *
 
 import arrow
 
+import random
 
-# In[62]:
+
+# In[24]:
+
+lisimg = os.listdir('/home/wcmckee/sellcoffee/imgs/')
+
+
+# In[ ]:
+
+
+
+
+# In[25]:
+
+ranlogo = random.choice(lisimg)
+
+
+# In[26]:
+
+ranlogo
+
+
+# In[ ]:
+
+
+
+
+# In[2]:
 
 rdcompz = open('/home/wcmckee/sellcoffee/comps.json', 'r')
 
 rdstrza = rdcompz.read()
 
 
-# In[63]:
+# In[3]:
 
 rdstrza
 
 
-# In[64]:
+# In[4]:
 
 strzadic = json.loads(rdstrza)
 
 
-# In[65]:
+# In[5]:
 
 strzadic
 
@@ -43,31 +70,31 @@ strzadic
 
 
 
-# In[66]:
+# In[6]:
 
 minszlen = '/home/wcmckee/sellcoffee/mins/'
 
 hoszlen = '/home/wcmckee/sellcoffee/hostnames/'
 
 
-# In[67]:
+# In[7]:
 
 hoslidz = os.listdir(hoszlen)
 
 
-# In[68]:
+# In[8]:
 
 #rdminza = open(minszlen + jsd, 'r')
 
 
-# In[69]:
+# In[9]:
 
 rdminz = open('/home/wcmckee/sellcoffee/minutes.json', 'r')
 
 jsdaz = json.loads(rdminz.read())
 
 
-# In[70]:
+# In[10]:
 
 for hosld in hoslidz:
     print hosld
@@ -77,17 +104,17 @@ for hosld in hoslidz:
     rdhoz.close()
 
 
-# In[71]:
+# In[11]:
 
 #rdhoz = open(hoszlen + )
 
 
-# In[72]:
+# In[12]:
 
 #rdminz
 
 
-# In[73]:
+# In[13]:
 
 for jsd in jsdaz:
     print jsd
@@ -97,47 +124,57 @@ for jsd in jsdaz:
     rdminza.close()
 
 
-# In[74]:
+# In[14]:
 
 gtim = arrow.now()
 
 
-# In[75]:
+# In[15]:
 
 import getpass
 
 
-# In[76]:
+# In[16]:
 
 gusr = getpass.getuser
 
 
-# In[77]:
+# In[17]:
 
 gusr()
 
 
-# In[78]:
+# In[18]:
 
 updatz = ('Updated by ' + gusr() + ' on ')
 
 
-# In[79]:
+# In[19]:
 
 str(gtim.datetime)
 
 
-# In[80]:
+# In[20]:
 
 updatz
 
 
-# In[81]:
+# In[21]:
 
 jsdaz
 
 
-# In[82]:
+# In[27]:
+
+ranlogo
+
+
+# In[ ]:
+
+
+
+
+# In[22]:
 
 doc = dominate.document(title='BroBeur Minutes')
 
@@ -149,6 +186,7 @@ with doc.head:
     with div().add(ol()):
         attr(cls='header')
         h1('BroBeur Minutes')
+        p(img('imgs/' + ranlogo, src='imgs/' + ranlogo))
         h3(updatz)
         h4(str(gtim.datetime))
         #p(img('imgs/getsdrawn-bw.png', src='imgs/getsdrawn-bw.png'))

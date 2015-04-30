@@ -30,7 +30,7 @@ getusr
 
 # In[7]:
 
-hostndir = ('/home/' + getusr + '/sellcoffee/hostnames/')
+hostndir = ('/home/wcmckee/sellcoffee/hostnames/')
 
 
 # In[12]:
